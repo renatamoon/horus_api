@@ -1,20 +1,18 @@
-# STANDARD IMPORTS
-import time
-
 # THIRD PART IMPORTS
 from playwright.sync_api import sync_playwright
 
 
-with sync_playwright() as p:
-    browser = p.chromium.launch(headless=False)
-    page = browser.new_page()
-    page.goto("https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops")
-    results = page.locator('title:has-text("Lenovo")')
+class GetScrapFromWebsite:
 
-    count = results.count()
+    @classmethod
+    def get_laptops_from_website(cls) -> list:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=False)
+            page = browser.new_page()
+            page.goto("https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops")
 
-    for i in range(count):
-        element = results.nth(i)
-        text = element.inner_text()
+            locator_results = page.locator("text=Lenovo")
 
-        print(text)
+            results_response = locator_results.all_inner_texts()
+
+            return results_response

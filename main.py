@@ -1,15 +1,8 @@
-# STANDARD IMPORTS
-from flask import Flask, request, Response, Request
-from http import HTTPStatus
+# PROJECT IMPORTS
+from src.router.router import app
+
+# THIRD PART IMPORTS
+from asgiref.wsgi import WsgiToAsgi
 
 
-app = Flask(__name__)
-
-
-@app.route('/get_data_from_lenovo_website', methods=["GET"])
-def xxx():
-    pass
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+asgi_app = WsgiToAsgi(app)
