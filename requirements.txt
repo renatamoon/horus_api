@@ -3,3 +3,6 @@ python-decouple==3.5
 asgiref==3.4.1
 Flask==2.1.2
 pytest-playwright==0.3.0
+loguru~=0.6.0
+playwright~=1.25.1
+motor~=3.0.0
