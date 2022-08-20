@@ -1,22 +1,21 @@
 # STANDARD IMPORTS
-from typing import Any
 from decouple import config
 
 # THIRD PART IMPORTS
 from loguru import logger
 
-from src.domain.exceptions.exceptions import DataNotInsertedOnDatabase
 # PROJECT IMPORTS
 from src.infrastructure.mongo_db.infrastructure import MongoDBInfrastructure
+from src.domain.exceptions.exceptions import DataNotInsertedOnDatabase, NoDataWasFoundOnDatabase
 
 
 class LaptopMongoRepository:
     infra = MongoDBInfrastructure
-    database = config("MONGODB_DATABASE_NAME")
-    collection = config("MONGODB_COLLECTION")
+    database = config("MONGODB_DATABASE_NAME")  # new_database
+    collection = config("MONGODB_COLLECTION")  # laptop_collection
 
     @classmethod
-    async def __get_collection(cls):
+    def __get_collection(cls):
         mongo_client = cls.infra.get_client()
         try:
             database = mongo_client[cls.database]
@@ -28,24 +27,35 @@ class LaptopMongoRepository:
             )
             logger.error(
                 error=error,
-                message=message,
-                database=cls.database,
-                collection=cls.collection,
+                message=message
             )
             raise error
 
     @classmethod
     async def save_laptops_on_database(
             cls,
-            laptop_database: list
-            ):
+            laptops: list
+            ) -> bool:
 
         collection = await cls.__get_collection()
         was_inserted = await collection.insert_many(
-            laptop_database
+            laptops
         )
 
-        if not was_inserted.matched_count == 1:
+        if not type(was_inserted.inserted_ids) == list:
             raise DataNotInsertedOnDatabase
 
         return bool(was_inserted)
+
+    @classmethod
+    def find_laptops_on_database(
+            cls
+    ) -> list:
+
+        collection = cls.__get_collection()
+        laptops = collection.find({"_id": 0})
+
+        if laptops is None:
+            raise NoDataWasFoundOnDatabase
+
+        return laptops
