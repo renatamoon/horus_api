@@ -11,8 +11,8 @@ from src.domain.exceptions.exceptions import DataNotInsertedOnDatabase, NoDataWa
 
 class LaptopMongoRepository:
     infra = MongoDBInfrastructure
-    database = config("MONGODB_DATABASE_NAME")  # new_database
-    collection = config("MONGODB_COLLECTION")  # laptop_collection
+    database = config("MONGODB_DATABASE_NAME")  # set as - new_database
+    collection = config("MONGODB_COLLECTION")  # set as - laptop_collection
 
     @classmethod
     def __get_collection(cls):
@@ -32,13 +32,13 @@ class LaptopMongoRepository:
             raise error
 
     @classmethod
-    async def save_laptops_on_database(
+    def save_laptops_on_database(
             cls,
             laptops: list
             ) -> bool:
 
-        collection = await cls.__get_collection()
-        was_inserted = await collection.insert_many(
+        collection = cls.__get_collection()
+        was_inserted = collection.insert_many(
             laptops
         )
 
@@ -53,9 +53,14 @@ class LaptopMongoRepository:
     ) -> list:
 
         collection = cls.__get_collection()
-        laptops = collection.find({"_id": 0})
+        laptops = collection.find({}, {'_id': 0})
 
-        if laptops is None:
+        laptop_results = []
+
+        for laptop in laptops:
+            laptop_results.append(laptop)
+
+        if laptop_results is None:
             raise NoDataWasFoundOnDatabase
 
-        return laptops
+        return laptop_results

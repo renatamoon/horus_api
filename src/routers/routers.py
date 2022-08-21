@@ -23,7 +23,7 @@ app = Flask("Horus API")
 async def insert_laptops_on_database() -> Response:
     try:
         laptops = await GetLaptopsService.get_laptops()
-        response = await LaptopMongoRepository.save_laptops_on_database(
+        response = LaptopMongoRepository.save_laptops_on_database(
             laptops=laptops
         )
 
@@ -75,12 +75,12 @@ async def insert_laptops_on_database() -> Response:
 @app.route("/get_all_laptops")
 async def get_all_laptops() -> Response:
 
-    response = await LaptopMongoRepository.find_laptops_on_database()
-
     try:
+        laptops_response = LaptopMongoRepository.find_laptops_on_database()
+
         response = ResponseModel(
             success=True,
-            result=response,
+            result=laptops_response,
             code=InternalCode.SUCCESS
         ).build_http_response(status=HTTPStatus.OK)
         return response
