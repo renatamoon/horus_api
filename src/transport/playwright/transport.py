@@ -1,5 +1,4 @@
 # THIRD PART IMPORTS
-from loguru import logger
 from playwright.async_api import async_playwright
 
 
