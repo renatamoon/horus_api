@@ -12,7 +12,7 @@ Web scraping robot API using Playwright with Flask (Python)
 
 ## <a id="projeto"> 💻 ABOUT THE PROJECT </a>
 
-Webscraping challenge using Playwright library as a tool to webscrap, save it on database, finally getting data of notebooks from 
+Webscraping challenge using Playwright library as a tool to web scrap, save it on database, finally getting data of notebooks from 
 website `https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops`.
 
 Some functionalities present on this project:
@@ -26,7 +26,7 @@ Some functionalities present on this project:
 
 <hr>
 
-## <a id="tecnologias"> 🧪 TECNOLOGIES </a>
+## <a id="tecnologias"> 🧪 TECHNOLOGIES </a>
 
 - Python
 - Flask
@@ -52,15 +52,22 @@ Some functionalities present on this project:
 
 #### On Linux:
 
-<b>- Create your virtual environment:</b> `virtualenv venv`<br>
-<b>- Activate your virtual environment:</b> `. venv/bin/activate`<br>
+<b>- Create your virtual environment:</b> `python -m venv venv`<br>
+<b>- Activate your virtual environment:</b> `source venv/bin/activate`<br>
 <b>- Execute requirements with the command:</b> `pip install -r requirements.txt`<br>
 
-<hr> 
-  
-* Change your local string connections on the file <b>`.env`</b> <br>
+<hr>
+
+Create a root `.env` file and change your local strings connections to do the properly connection <br>
+
 * Create a database on your Local MongoDB: `laptop_database` <br>
 * Create a collection on your Local MongoDB `laptop_collection` <br>
+
+```commandline
+MONGO_CONNECTION_URL="mongodb+srv://user:password@clustername.xxxxx.mongodb.net/?retryWrites=true&w=majority"
+MONGODB_DATABASE_NAME="new_database"
+MONGODB_COLLECTION="laptop_collection"
+```
 
 <hr>
 
