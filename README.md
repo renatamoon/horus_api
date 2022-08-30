@@ -35,7 +35,7 @@ Some functionalities present on this project:
 
 <hr>
 
-## <a id="instalacao"> 🔴 HOW TO EXECUTE IT </a> 
+## <a id="instalacao"> HOW TO EXECUTE IT </a> 
 
 <b>- Clone the repo with the following command:</b> `git clone https://github.com/renatamoon/horus_api.git` <br>
 
@@ -71,20 +71,20 @@ MONGODB_COLLECTION="laptop_collection"
 
 <hr>
 
-## <a id="instalacao"> 🔴 EXECUTE HYPERCORN </a> 
+## <a id="instalacao"> EXECUTE HYPERCORN </a> 
 
 - To Execute the application run the command: `uvicorn main:app --reload`
 
 <hr>
 
-## <a id="instalacao"> 🔴 REQUISITION ROUTES </a> 
+## <a id="instalacao"> REQUISITION ROUTES </a> 
 
 - First use the following route to save data on your database: `http:{your-host}/put/save_laptops` ;
 - Then you can use the route `http:{your-host}/get_all_laptops` to get all data from the database;
 
 <hr>
 
-## <a id="imagens"> 🔴 RESPONSES: </a> 
+## <a id="imagens"> RESPONSES: </a> 
 
 - Expected return of the route `/put/save_laptops` :
 
