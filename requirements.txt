@@ -8,3 +8,4 @@ playwright~=1.25.1
 aioflask~=0.4.0
 python-dotenv==0.20.0
 dnspython==2.2.1
+pymongo==4.2.0
